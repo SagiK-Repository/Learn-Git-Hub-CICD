@@ -50,4 +50,39 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 <br><br><br>
 
-# 4. CI/CD 구축 (1) - 
+# 4. CI/CD 구축 (1) - 기본적인 Message 출력
+
+- GitHub에서 이미 제작한 Repository -> Actions를 접속한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/231161193-e5354ee6-8f61-493b-aa48-d3cf2c97726e.png">  
+- Simple workflow를 선택한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/231161416-c53254dc-ca27-408a-81a9-e14112f38f39.png">  
+- 자동으로 생성되는 blank.yml을 확인한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/231161818-cd63ca6f-ba63-4db9-81fa-78c1a8929fd3.png">  
+- 이러한 yml 파일을 다음과 같이 수정한다. (파일 이름을 CICD-Test.yml로 설정하였다)  
+  ```yml
+  name: CI/CD-Test # workflow 이름
+  
+  # Controls when the workflow will run
+  on:
+    push: # push 이벤트가 발생하면
+      branches: [ "main" ] # "main" 브랜치에서만 동작
+  
+  jobs:
+    build: # job 이름
+      runs-on: ubuntu-latest # 사용할 runner의 운영체제
+      
+      steps: # 실행할 작업 목록
+        - uses: actions/checkout@v3 # v3 버전의 actions/checkout 를 사용
+   
+        - name: Run a one-line script # 작업 이름
+          run: echo Hello, world! # 실행할 명령어
+  
+        - name: Run a multi-line script # 작업 이름
+          run: | # 실행할 명령어들
+            echo Add other actions to build,
+            echo test, and deploy your project.
+  ```
+- 작성 후 commit한다.
+- 이후 Action에 접속하여 실행여부를 확인한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/231165951-ec169923-5797-4ef1-8cb3-56816225e420.png">  
+- 이후 다른 내용을 Commit 한 후 상황을 재 확인한다.
