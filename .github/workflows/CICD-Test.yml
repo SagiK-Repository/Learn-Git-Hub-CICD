@@ -1,0 +1,21 @@
+name: CI/CD-Test # workflow 이름
+
+# Controls when the workflow will run
+on:
+  push: # push 이벤트가 발생하면
+    branches: [ "main" ] # "main" 브랜치에서만 동작
+
+jobs:
+  build: # job 이름
+    runs-on: ubuntu-latest # 사용할 runner의 운영체제
+    
+    steps: # 실행할 작업 목록
+      - uses: actions/checkout@v3 # v3 버전의 actions/checkout 를 사용
+ 
+      - name: Run a one-line script # 작업 이름
+        run: echo Hello, world! # 실행할 명령어
+
+      - name: Run a multi-line script # 작업 이름
+        run: | # 실행할 명령어들
+          echo Add other actions to build,
+          echo test, and deploy your project.
