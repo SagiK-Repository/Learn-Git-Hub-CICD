@@ -7,7 +7,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 ### 목표
 - [x] : 1. CI/CD?
-- [x] : 2. Git Hub CI/CD
+- [x] : 2. Git Hub Action
+- [ ] : 3. Git Hub Action 구성요소
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -32,7 +33,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 <br><br><br>
 
-# 2. Git Hub CI/CD
+# 2. Git Hub Action
 
 - <img src="https://user-images.githubusercontent.com/66783849/231070276-58dbb733-7546-4456-86b7-ff98d6e0d56d.png" width="150">
 - Git Hub Action을 통해 CI/CD를 구성한다.
@@ -40,3 +41,13 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 ### 참고자료
 - https://velog.io/@sgwon1996/GitHub-Action%EC%9C%BC%EB%A1%9C-CICD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0
+
+<br><br><br>
+
+# 3. Git Hub Action 구성요소
+
+
+
+<br><br><br>
+
+# 4. CI/CD 구축 (1) - 
