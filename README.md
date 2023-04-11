@@ -29,3 +29,14 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 ### 참고자료
 
 - https://www.redhat.com/ko/topics/devops/what-is-ci-cd
+
+<br><br><br>
+
+# 2. Git Hub CI/CD
+
+- <img src="https://user-images.githubusercontent.com/66783849/231070276-58dbb733-7546-4456-86b7-ff98d6e0d56d.png" width="150">
+- Git Hub Action을 통해 CI/CD를 구성한다.
+- 빌드,테스트,배포를 자동화 시키는 파이프라인을 만들 수 있다.
+
+### 참고자료
+- https://velog.io/@sgwon1996/GitHub-Action%EC%9C%BC%EB%A1%9C-CICD-%EA%B5%AC%EC%B6%95%ED%95%98%EA%B8%B0
