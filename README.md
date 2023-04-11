@@ -6,7 +6,7 @@
 Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 ### 목표
-- [ ] : 1. CI/CD?
+- [x] : 1. CI/CD?
 - [ ] : 2. Git Hub CI/CD
 
 ### 제작자
