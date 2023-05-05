@@ -11,7 +11,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - [ ] : 3. Git Hub Action 구성요소
 - [x] : 4. CI/CD 구축 (1) - 기본적인 Message 출력
 - [x] : 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
-- [ ] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
+- [x] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -154,4 +154,5 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   ```
 - Brantch를 만들어 main으로 push한다.  
   <img src="https://user-images.githubusercontent.com/66783849/236381564-19b4af27-0246-4c5d-854f-30e9aa5ca33a.png"/>  
+  <img src="https://user-images.githubusercontent.com/66783849/236381906-d6a82a24-2d37-46e2-88f7-35676a7d137c.png"/> 
 
