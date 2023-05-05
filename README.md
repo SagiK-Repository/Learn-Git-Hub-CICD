@@ -120,3 +120,6 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - 3. GitHub에서 Tag를 생성한다.  
   <img src="https://user-images.githubusercontent.com/66783849/236379090-5700d891-364b-41c3-b948-80cf6bd95b6f.png"/>  
   <img src="https://user-images.githubusercontent.com/66783849/236379064-0d42e8f2-0644-4191-a822-1e5aabe639c9.png"/>  
+  - 문자가 있는 Tag를 생성하려면, git 또는 다른 플랫폼을 활용한다.  
+    <img src="https://user-images.githubusercontent.com/66783849/236379607-0721d46f-7d25-4328-a6fe-9a029feb657d.png"/>  
+  
