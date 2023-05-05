@@ -88,3 +88,32 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - 이후 Action에 접속하여 실행여부를 확인한다.  
   <img src="https://user-images.githubusercontent.com/66783849/231165951-ec169923-5797-4ef1-8cb3-56816225e420.png">  
 - 이후 다른 내용을 Commit 한 후 상황을 재 확인한다.
+
+<br><br>
+
+# 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
+
+- 1. GitHub Repository `.github/workflow` 폴더 내부에 존재하는 yml을 통해 Actions가 동작한다.
+- 2. yml 파일을 만든다.
+  ```yml
+  on:
+    push: # push 이벤트 감지
+      tags: # 태그 이벤트 중
+        - 'release/*' # release 태그가 붙은 커밋 감지
+  
+  jobs:
+    build: # build 작업
+      runs-on: ubuntu-latest # 우분투 환경에서 실행
+      
+      steps: # 실행할 작업들
+      
+        - name: Checkout code # 코드 체크아웃 액션 실행
+          uses: actions/checkout@v2
+          
+        - name: Run custom command # 사용자 정의 명령어 실행
+          if: contains(github.ref, 'refs/tags/release') # github.ref에 'refs/tags/release' 문자열이 포함되어 있는지 확인
+          
+          run: | # 실행할 명령어들
+            echo Add other actions to build,
+            echo test, and deploy your project.
+  ```
