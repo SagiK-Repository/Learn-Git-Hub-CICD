@@ -12,6 +12,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - [x] : 4. CI/CD 구축 (1) - 기본적인 Message 출력
 - [x] : 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
 - [x] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
+- [ ] : 7. CI/CD 구축 (4) - 자동 배포
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -75,7 +76,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
       runs-on: ubuntu-latest # 사용할 runner의 운영체제
       
       steps: # 실행할 작업 목록
-        - uses: actions/checkout@v3 # v3 버전의 actions/checkout 를 사용
+        - uses: actions/checkout@v3 # v3 버전의 actions/checkout 를 사용 (코드를 로컬 환경으로 거져온다)
    
         - name: Run a one-line script # 작업 이름
           run: echo Hello, world! # 실행할 명령어
@@ -108,7 +109,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
       
       steps: # 실행할 작업들
       
-        - name: Checkout code # 코드 체크아웃 액션 실행
+        - name: Checkout code # 코드 체크아웃 액션 실행 (코드를 로컬 환경으로 거져온다)
           uses: actions/checkout@v2
           
         - name: Run custom command # 사용자 정의 명령어 실행
@@ -142,7 +143,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
       runs-on: ubuntu-latest # 우분투 환경에서 실행
       steps: # 실행할 작업들
 
-        - name: Checkout code # 코드 체크아웃 액션 실행
+        - name: Checkout code # 코드 체크아웃 액션 실행 (코드를 로컬 환경으로 거져온다)
           uses: actions/checkout@v2
 
         - name: Run custom command # 사용자 정의 명령어 실행
@@ -155,4 +156,57 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - Brantch를 만들어 main으로 push한다.  
   <img src="https://user-images.githubusercontent.com/66783849/236381564-19b4af27-0246-4c5d-854f-30e9aa5ca33a.png"/>  
   <img src="https://user-images.githubusercontent.com/66783849/236381906-d6a82a24-2d37-46e2-88f7-35676a7d137c.png"/> 
+
+<br><br>
+
+# 7. CI/CD 구축 (4) - 자동 배포
+
+- 특정 Brantch에 Push가 되었을 때, 자동 배포와 더불어 특정 내용으로 배포할 수 있도록 한다.  
+- Main 브랜치에 Merge할 때, "Release"라는 문자로 시작하는 내용으로 Commit 했을 경우에 같은 내용으로 Release를 구성할 수 있도록 한다.  
+  ```yml
+  name: Deploy to production # workflow 이름 지정
+  
+  on:
+    push:
+      branches:
+        - master # master 브랜치에 push가 일어날 때
+  
+  jobs:
+    build-and-deploy:
+      runs-on: ubuntu-latest # 실행할 runner 환경 지정
+      
+      steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.ref }}
+        # 코드를 checkout
+          
+      - name: Build and test # 빌드 및 테스트 수행
+        run: |
+          # Add build and test steps here
+          
+      # 최근 commit의 메시지를 가져와서 message.txt 파일에 저장하고, output으로 message 변수에 저장
+      - name: Merge commit message 
+        run: |
+          git log -1 --pretty=%B > message.txt
+          echo "::set-output name=message::$(cat message.txt)"
+        id: merge_message
+        
+      - name: Create release tag
+        if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
+        uses: actions/create-release@v1 
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          body: ${{ steps.merge_message.outputs.message }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Deploy to production # 배포 단계 추가
+        if: startsWith(steps.merge_message.outputs.message, 'Release')
+        run: |
+          # Add deployment steps here
+  ```
 
