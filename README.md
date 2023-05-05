@@ -131,4 +131,26 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 # 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
 
 - 특정 Brantch에 push할 때 Actions가 동작하도록 한다.  
+  ```yml
+  on:
+    push: # push 이벤트 감지
+      branches: # 브랜치 이벤트 중
+        - 'master*' # master로 시작하는 브랜치가 push될 때 감지
   
+  jobs:
+    build: # build 작업
+      runs-on: ubuntu-latest # 우분투 환경에서 실행
+      steps: # 실행할 작업들
+
+        - name: Checkout code # 코드 체크아웃 액션 실행
+          uses: actions/checkout@v2
+
+        - name: Run custom command # 사용자 정의 명령어 실행
+        - 
+          if: startsWith(github.ref, 'refs/heads/master') # github.ref가 'refs/heads/master'로 시작하는지 확인
+
+          run: | # 실행할 명령어들
+            echo Add other actions to build, # 빌드할 다른 작업 추가
+            echo test, and deploy your project. # 프로젝트 테스트 및 배포
+  ```
+
