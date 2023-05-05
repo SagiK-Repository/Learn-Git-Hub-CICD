@@ -153,4 +153,4 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
             echo Add other actions to build, # 빌드할 다른 작업 추가
             echo test, and deploy your project. # 프로젝트 테스트 및 배포
   ```
-- Brantch를 만들어 main으로 push한다.  
+- Brantch를 만들어 main으로 merge한다.  
