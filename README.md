@@ -153,3 +153,5 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
             echo test, and deploy your project. # 프로젝트 테스트 및 배포
   ```
 - Brantch를 만들어 main으로 push한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/236381564-19b4af27-0246-4c5d-854f-30e9aa5ca33a.png"/>  
+
