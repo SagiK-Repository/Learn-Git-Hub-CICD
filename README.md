@@ -99,7 +99,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   on:
     push: # push 이벤트 감지
       tags: # 태그 이벤트 중
-        - 'release/*' # release 태그가 붙은 커밋 감지
+        - 'release*' # release 태그가 붙은 커밋 감지
   
   jobs:
     build: # build 작업
@@ -123,3 +123,4 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   - 문자가 있는 Tag를 생성하려면, git 또는 다른 플랫폼을 활용한다.  
     <img src="https://user-images.githubusercontent.com/66783849/236379607-0721d46f-7d25-4328-a6fe-9a029feb657d.png"/>  
 - 4. 결과를 확인한다.  
+  
