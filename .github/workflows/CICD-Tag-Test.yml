@@ -1,7 +1,7 @@
 on:
   push: # push 이벤트 감지
     tags: # 태그 이벤트 중
-      - 'release/*' # release 태그가 붙은 커밋 감지
+      - 'release*' # release 태그가 붙은 커밋 감지
 
 jobs:
   build: # build 작업
