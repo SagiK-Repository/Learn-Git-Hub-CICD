@@ -1,0 +1,20 @@
+on:
+  push: # push 이벤트 감지
+    tags: # 태그 이벤트 중
+      - 'release/*' # release 태그가 붙은 커밋 감지
+
+jobs:
+  build: # build 작업
+    runs-on: ubuntu-latest # 우분투 환경에서 실행
+    
+    steps: # 실행할 작업들
+    
+      - name: Checkout code # 코드 체크아웃 액션 실행
+        uses: actions/checkout@v2
+        
+      - name: Run custom command # 사용자 정의 명령어 실행
+        if: contains(github.ref, 'refs/tags/release') # github.ref에 'refs/tags/release' 문자열이 포함되어 있는지 확인
+        
+        run: | # 실행할 명령어들
+          echo Add other actions to build,
+          echo test, and deploy your project.
