@@ -166,6 +166,16 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 - 특정 Brantch에 Push가 되었을 때, 자동 배포와 더불어 특정 내용으로 배포할 수 있도록 한다.  
 - Main 브랜치에 Merge할 때, "Release"라는 문자로 시작하는 내용으로 Commit 했을 경우에 같은 내용으로 Release를 구성할 수 있도록 한다.  
+- Release를 구성하도록 하기 위해서는 GitHub Token이 필요하다.
+- GitHub Token 생성 방법
+  - GitHub > 계정 Setting > Developer settings > Personal access tokens > Generate new token  
+  <img src="https://user-images.githubusercontent.com/66783849/236632195-18ca4171-c606-4f6d-b76b-3e56b26cdc12.png"/>  
+- GitHub 환경 변수 지정 방법
+  - GitHub > 원하는 Repository > Setting > Secret and variables > Actions > New repository secret > "JJU_TOKEN" 생성후 Token 값을 입력 > Add secre
+  - 이러한 Secret 환경 변수는 계정을 가지고 있지 않은 한은 접근이 불가능 하다.  
+  - 다음과 같이 활용할 수 있다. `token: ${{ secrets.JJU_TOKEN }}`  
+  <img src="https://user-images.githubusercontent.com/66783849/236632643-564094a4-c7cd-4ea1-bb74-f6bf7835244f.png"/>
+- 다음과 같이 yml 파일을 구성한다.  
   ```yml
   name: Deploy to production # workflow 이름 지정
   
@@ -205,7 +215,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.JJU_TOKEN }}
           
       - name: Deploy to production # 배포 단계 추가
         if: startsWith(steps.merge_message.outputs.message, 'Release')
@@ -213,6 +223,6 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
           # Add deployment steps here
   ```
 - main Brantch로 "Release v0.1.1"Command을 시도한다.  
-  <img src="https://user-images.githubusercontent.com/66783849/236631261-b016e750-66ec-4e4f-91ac-0b9e955b9c19.png"/>
+  <img src="https://user-images.githubusercontent.com/66783849/236631261-b016e750-66ec-4e4f-91ac-0b9e955b9c19.png"/>  
 - Release 결과를 다음과 같이 확인할 수 있다.  
 
