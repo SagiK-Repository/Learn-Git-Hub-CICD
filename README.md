@@ -233,11 +233,20 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   <img src="https://user-images.githubusercontent.com/66783849/236631261-b016e750-66ec-4e4f-91ac-0b9e955b9c19.png"/>  
 - Release 결과를 다음과 같이 확인할 수 있다.  
   <img src="https://user-images.githubusercontent.com/66783849/236633898-c665019d-6383-46c6-b40d-417ab668f584.png"/>  
-  <img src=""/>
+  <img src="https://user-images.githubusercontent.com/66783849/236634010-383ea168-d1bd-4ef2-b904-6c97f9819539.png"/>
 
 <br><br>
 
 # 7. CI/CD 구축 (4) - 자동 빌드에 대한 내용
+
+- ssh 그리고 linux 언어가 동작하는 환경에 대해서 프로젝트를 빌드할 수 있다면, 자동화 빌드도 가능할 것으로 추측이 된다.  
+  ```yml
+    - name: Build and test
+      run: |
+        # Add build and test steps here
+        dotnet build MySolution.sln
+        dotnet test MyTestsProject.csproj --logger "trx;LogFileName=test_results.xml"
+  ```
 
 <br><br>
 
