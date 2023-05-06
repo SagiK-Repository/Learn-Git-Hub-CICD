@@ -212,7 +212,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
+          tag_name: v${{ github.run_number }} # 반드시 v0.1.1와 같이 v 접두사가 들어가야 한다.
           release_name: Release v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
