@@ -205,6 +205,12 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
           git log -1 --pretty=%B > message.txt
           echo "::set-output name=message::$(cat message.txt)"
         id: merge_message
+
+      - name: Get Release Version
+        if: startsWith(steps.merge_message.outputs.message, 'Release')
+        id: extract_release_version # release 버전 추출
+        run: |
+          echo "::set-output name=version::$(echo ${{ steps.merge_message.outputs.message }} | sed 's/Release //')" # release 태그로부터 version 정보 추출하여 output으로 설정
         
       - name: Create release tag
         if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
@@ -212,7 +218,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }} # 반드시 v0.1.1와 같이 v 접두사가 들어가야 한다.
+          tag_name: ${{ steps.extract_release_version.outputs.version }} # 반드시 v0.1.1와 같이 v 접두사가 들어가야 한다.
           release_name: Release v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
