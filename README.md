@@ -212,6 +212,6 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
         run: |
           # Add deployment steps here
   ```
-- main Brantch로 "Release v0.1.1"Command를 부여하고 Merge한다.  
-  <img src="https://user-images.githubusercontent.com/66783849/236630822-6ea2e4ff-d5e5-432c-a5de-fc1251644dba.png"/>  
+- main Brantch로 "Release v0.1.1"Command을 시도한다.  
+  <img src=""/>
 
