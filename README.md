@@ -214,4 +214,5 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   ```
 - main Brantch로 "Release v0.1.1"Command을 시도한다.  
   <img src="https://user-images.githubusercontent.com/66783849/236631261-b016e750-66ec-4e4f-91ac-0b9e955b9c19.png"/>
+- Release 결과를 다음과 같이 확인할 수 있다.  
 
