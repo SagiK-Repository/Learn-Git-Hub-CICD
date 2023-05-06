@@ -36,7 +36,7 @@
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
           prerelease: false
-          token: ${{ secrets.JJU_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Deploy to production # 배포 단계 추가
         if: startsWith(steps.merge_message.outputs.message, 'Release')
