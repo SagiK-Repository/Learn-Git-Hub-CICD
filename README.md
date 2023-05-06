@@ -12,6 +12,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - [x] : 4. CI/CD 구축 (1) - 기본적인 Message 출력
 - [x] : 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
 - [ ] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
+- [ ] : 7. CI/CD 구축 (4) - 자동 빌드에 대한 내용
+- [ ] : 8. CI/CD 구축 정리
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
