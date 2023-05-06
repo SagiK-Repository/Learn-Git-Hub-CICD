@@ -166,8 +166,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 - 특정 Brantch에 Push가 되었을 때, 자동 배포와 더불어 특정 내용으로 배포할 수 있도록 한다.  
 - Main 브랜치에 Merge할 때, "Release"라는 문자로 시작하는 내용으로 Commit 했을 경우에 같은 내용으로 Release를 구성할 수 있도록 한다.  
-- Release를 구성하도록 하기 위해서는 GitHub Token이 필요하다.
-- GitHub Token 생성 방법
+- Release를 구성하도록 하기 위해서는 GitHub Token이 필요하다. 이때 자동으로 제공되는 GITHUB_TOKEN를 활용하면 된다.
+- 수동으로 GitHub Token 생성 방법
   - GitHub > 계정 Setting > Developer settings > Personal access tokens > Generate new token  
   <img src="https://user-images.githubusercontent.com/66783849/236632195-18ca4171-c606-4f6d-b76b-3e56b26cdc12.png"/>  
 - GitHub 환경 변수 지정 방법
@@ -209,13 +209,14 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
       - name: Create release tag
         if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
         uses: actions/create-release@v1 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ github.run_number }}
           release_name: Release v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
           prerelease: false
-          token: ${{ secrets.JJU_TOKEN }}
           
       - name: Deploy to production # 배포 단계 추가
         if: startsWith(steps.merge_message.outputs.message, 'Release')
