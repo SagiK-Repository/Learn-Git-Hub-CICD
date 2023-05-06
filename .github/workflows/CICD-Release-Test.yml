@@ -26,6 +26,7 @@ jobs:
         git log -1 --pretty=%B > message.txt
         echo "::set-output name=message::$(cat message.txt)"
       id: merge_message
+      
     - name: Get Release Version
       if: startsWith(steps.merge_message.outputs.message, 'Release')
       id: extract_release_version # release 버전 추출
