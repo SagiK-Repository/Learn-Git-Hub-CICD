@@ -139,7 +139,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   on:
     push: # push 이벤트 감지
       pull_request: # 브랜치 이벤트 중
-        - 'main*' # master로 시작하는 브랜치에 대한 pull request 이벤트 감지
+        - 'main*' # main로 시작하는 브랜치에 대한 pull request 이벤트 감지
   
   jobs:
     build: # build 작업
@@ -170,9 +170,9 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   name: Deploy to production # workflow 이름 지정
   
   on:
-    push:
-      branches:
-        - master # master 브랜치에 push가 일어날 때
+    push: # push 이벤트 감지
+      pull_request: # 브랜치 이벤트 중
+        - 'main*' # main로 시작하는 브랜치에 대한 pull request 이벤트 감지
   
   jobs:
     build-and-deploy:
@@ -212,4 +212,6 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
         run: |
           # Add deployment steps here
   ```
+- main Brantch로 "Release v0.1.1"Command를 부여하고 Merge한다.  
+  <img src="https://user-images.githubusercontent.com/66783849/236630822-6ea2e4ff-d5e5-432c-a5de-fc1251644dba.png"/>  
 
