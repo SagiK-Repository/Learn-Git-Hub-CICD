@@ -40,7 +40,7 @@
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.extract_release_version.outputs.version }}
+          tag_name: ${{ steps.extract_release_version.outputs.version }}
           release_name: Release ${{ steps.merge_message.outputs.message }} v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
