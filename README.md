@@ -170,8 +170,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   name: Deploy to production # workflow 이름 지정
   
   on:
-    push: # push 이벤트 감지
-      pull_request: # 브랜치 이벤트 중
+    push:
+      branches:
         - 'main*' # main로 시작하는 브랜치에 대한 pull request 이벤트 감지
   
   jobs:
