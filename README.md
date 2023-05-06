@@ -86,7 +86,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
             echo Add other actions to build,
             echo test, and deploy your project.
   ```
-- 처음 name을 정의하면  다음과 같이 이름이 등록이 된다.  
+- 처음 name을 정의하면  다음과 같이 이름이 등록이 된다. 그렇지 않으면 파일 이름이 등록된다.  
   <img src="https://user-images.githubusercontent.com/66783849/236629152-5cdd1199-413a-41b6-a162-5ced30ab2dd4.png"/>
 - 작성 후 commit한다.
 - 이후 Action에 접속하여 실행여부를 확인한다.  
