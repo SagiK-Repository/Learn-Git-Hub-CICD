@@ -28,12 +28,19 @@
         id: merge_message
         
       - name: Create release tag
+        if: startsWith(steps.merge_message.outputs.message, 'Release')
+        id: extract_release_version # release 버전 추출
+        run: |
+          echo "::set-output name=version::$(echo ${{ steps.merge_message.outputs.message }} | sed 's/Release //')" # release 태그로부터 version 정보 추출하여 output으로 설정
+  
+      
+      - name: Create release tag
         if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
         uses: actions/create-release@v1 
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
+          tag_name: v${{ steps.extract_release_version.outputs.version }}
           release_name: Release ${{ steps.merge_message.outputs.message }} v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
