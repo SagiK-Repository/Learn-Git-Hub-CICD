@@ -30,13 +30,14 @@
       - name: Create release tag
         if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
         uses: actions/create-release@v1 
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release v${{ github.run_number }}
+          tag_name: ${{ steps.merge_message.outputs.message }}
+          release_name: Release ${{ steps.merge_message.outputs.message }} v${{ github.run_number }}
           body: ${{ steps.merge_message.outputs.message }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Deploy to production # 배포 단계 추가
         if: startsWith(steps.merge_message.outputs.message, 'Release')
