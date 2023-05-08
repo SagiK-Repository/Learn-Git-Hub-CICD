@@ -256,6 +256,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
         dotnet build MySolution.sln
         dotnet test MyTestsProject.csproj --logger "trx;LogFileName=test_results.xml"
   ```
+- c#에 대한 예시는 다음 [링크](https://github.com/SagiK-Repository/Test_CSharp_CICD)를 통해 확인할 수 있다.  
 
 <br><br>
 
