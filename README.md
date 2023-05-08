@@ -8,7 +8,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 ### 목표
 - [x] : 1. CI/CD?
 - [x] : 2. Git Hub Action
-- [ ] : 3. Git Hub Action 구성요소
+- [x] : 3. Git Hub Action 구성요소
 - [x] : 4. CI/CD 구축 (1) - 기본적인 Message 출력
 - [x] : 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
 - [x] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
