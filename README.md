@@ -12,8 +12,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 - [x] : 4. CI/CD 구축 (1) - 기본적인 Message 출력
 - [x] : 5. CI/CD 구축 (2) - Tag에 따라 Message 출력
 - [x] : 6. CI/CD 구축 (3) - Marster Brantch Push시 출력
-- [ ] : 7. CI/CD 구축 (4) - 자동 빌드에 대한 내용
-- [ ] : 8. CI/CD 구축 정리
+- [x] : 7. CI/CD 구축 (4) - 자동 빌드에 대한 내용
+- [x] : 8. CI/CD 구축 정리
 
 ### 제작자
 [@SAgiKPJH](https://github.com/SAgiKPJH)
@@ -182,7 +182,7 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
   on:
     push:
       branches:
-        - 'main*' # main로 시작하는 브랜치에 대한 pull request 이벤트 감지
+        - 'main*' # main로 시작하는 브랜치에 대한 push 이벤트 감지
   
   jobs:
     build-and-deploy:
@@ -252,4 +252,85 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 # 8. CI/CD 구축 정리
 
-<br><br>
+- 이름 및 이벤트 정의
+  ```yml
+  name: Deploy to production # workflow 이름 지정
+  
+  on:
+    push:
+      branches:
+        - 'main*' # main로 시작하는 브랜치에 대한 push 이벤트 감지
+      branches: [ "main" ] # "main" 브랜치에서만 동작
+      pull_request: # 브랜치 이벤트 중
+        - 'main' # main 브랜치에 대한 pull request 이벤트 감지
+      tags: # 태그 이벤트 중
+        - 'release' # release 태그가 붙은 커밋 감지
+  ```
+- 환경 지정
+  ```yml
+  jobs:
+    build: # build 작업
+      runs-on: ubuntu-latest # 실행할 runner 환경 지정
+    build-and-deploy:
+      runs-on: ubuntu-latest # 우분투 환경에서 실행
+  ```
+- Git Checkout
+  ```yml
+      steps: # 실행할 작업들
+        - name: Checkout code # 코드 체크아웃 액션 실행 (코드를 로컬 환경으로 거져온다)
+          uses: actions/checkout@v2
+    
+        - uses: actions/checkout@v3 # v3 버전의 actions/checkout 를 사용 (코드를 로컬 환경으로 거져온다)
+
+        - name: Checkout code
+          uses: actions/checkout@v2
+          with: # Action에 전달할 인자(argument)를 지정
+            ref: ${{ github.ref }} # ref는 체크아웃할 브랜치를 지정 
+            # ${{ github.ref }} 현재 이벤트에서 체크아웃해야 할 브랜치
+  ``` 
+- Build and test
+  ```yml
+        - name: Build and test
+          run: |
+            # Add build and test steps here
+            dotnet build MySolution.sln
+            dotnet test MyTestsProject.csproj --logger "trx;LogFileName=test_results.xml"
+  ```
+- 기타 활용
+  ```yml
+        - name: Run custom command # 사용자 정의 명령어 실행
+          if: startsWith(github.ref, 'refs/heads/master') # github.ref가 'refs/heads/master'로 시작하는지 확인
+
+          run: | # 실행할 명령어들
+            echo Add other actions to build, # 빌드할 다른 작업 추가
+            echo test, and deploy your project. # 프로젝트 테스트 및 배포
+
+        - name: Run custom command # 사용자 정의 명령어 실행
+          if: contains(github.ref, 'refs/tags/release') # github.ref에 'refs/tags/release' 문자열이 포함되어 있는지 확인
+          
+          run: | # 실행할 명령어들
+            echo Add other actions to build,
+            echo test, and deploy your project.
+  ```
+- Get Release
+  ```yml
+      - name: Get Release Version
+        if: startsWith(steps.merge_message.outputs.message, 'Release')
+        id: extract_release_version # release 버전 추출
+        run: |
+          echo "::set-output name=version::$(echo ${{ steps.merge_message.outputs.message }} | sed 's/Release //')" # release 태그로부터 version 정보 추출하여 output으로 설정
+  ```
+- release
+  ```yml
+      - name: Create release tag
+        if: startsWith(steps.merge_message.outputs.message, 'Release') # startsWith 함수를 사용하여 message가 'Release'로 시작하는지 확인하고, tag 생성
+        uses: actions/create-release@v1 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.extract_release_version.outputs.version }} # 반드시 v0.1.1와 같이 v 접두사가 들어가야 한다.
+          release_name: Release v${{ github.run_number }}
+          body: ${{ steps.merge_message.outputs.message }}
+          draft: false
+          prerelease: false
+  ```
