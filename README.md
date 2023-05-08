@@ -51,7 +51,16 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 # 3. Git Hub Action 구성요소
 
-
+- Event
+  - Action을 실행할 이벤트 유형 및 트리거를 정의합니다.
+- Job
+  - Action을 실행하는 단위로, 하나 이상의 Step으로 구성됩니다.
+- Step
+  - Job에서 실행할 명령어와 작업을 정의합니다.
+- Runner
+  - Action이 실행될 환경을 정의합니다.
+- Workflow
+  - Event, Job, Step을 조합하여 작업의 흐름과 실행 순서를 정의합니다.
 
 <br><br><br>
 
