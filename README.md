@@ -262,7 +262,8 @@ Git Hub에서 CICD를 활용하는 방법을 익힌다.
 
 # 9. CI/CD 구축 정리
 
-- 이름 및 이벤트 정의
+- yml을 통해 actions를 구성한다.
+- yml 전반부 : 이름 및 이벤트 정의
   ```yml
   name: Deploy to production # workflow 이름 지정
   
